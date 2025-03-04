@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping list example</title>
+  <style>
+    li {
+      margin-bottom: 10px;
+    }
+    
+    li button {
+      font-size: 12px;
+      margin-left: 20px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  
+  <h1>My shopping list</h1>
+  
+  <div>
+    <label for="item">Enter a new item:</label>
+    <input type="text" name="item" id="item">
+    <button>Add item</button>
+  </div>
+  
+  <ul>
+    
+  </ul>
+  
+  <script>
+    // Get the HTML elements into variables
+    const list = document.querySelector('ul');
+    const txtInput = document.querySelector('#item');
+    const btnAddItem = document.querySelector('button');
+    
+    /*
+    * Add item when the 'Add Item Button'
+    * or 'Enter' is pressed 
+    */
+    btnAddItem.addEventListener('click', addItem);
+    txtInput.addEventListener('keypress', (e) =>{
+      if (e.key === 'Enter') addItem();
+    });
+    
+    function addItem() {
+      // Get the name of the item
+      let itemName = txtInput.value;
+      // Prepare the text box for the next item to be typed
+      txtInput.value = '';
+      
+      // Create the elements for a shopping list item 
+      const listItem = document.createElement('li');
+      const span = document.createElement('span');
+      const btnDelItem = document.createElement('button');
+      
+      // Attach the elements together
+      listItem.appendChild(span);
+      listItem.appendChild(btnDelItem);
+      span.textContent = itemName;
+      btnDelItem.textContent = 'Delete';
+      
+      // Add 'delete' function to the item button
+      btnDelItem.addEventListener('click', () => {
+        /* The Node.remove() function isn't used because
+        it doesn't work on older browsers
+        */ 
+        btnDelItem.
+        parentNode.
+        parentNode.removeChild(btnDelItem.parentNode);
+      })
+      
+      // Put the list item into the list
+      list.appendChild(listItem);
+      
+      txtInput.focus();
+    }
+    
+    
+  </script>
+</body>
+</html>
