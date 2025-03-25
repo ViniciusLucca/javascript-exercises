@@ -16,8 +16,8 @@ const multiply = function(numArray) {
   return numArray.reduce((total, current) => total * current);
 };
 
-const power = function() {
-	
+const power = function(a, b) {
+	return a**b;
 };
 
 const factorial = function() {
